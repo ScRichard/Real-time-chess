@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 group = 'dev.richardschmidt.chess'
@@ -8,8 +10,30 @@ version = '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass = 'dev.richardschmidt.chess.Main'
+}
 
 dependencies {
+
+    compileOnly 'org.projectlombok:lombok:1.18.42'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.openjfx:javafx-controls:18'
+
+
+    // Testovanie
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -18,3 +42,4 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
